@@ -1,4 +1,10 @@
 <html lang="en">
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+session_start();
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -7,19 +13,15 @@
     <link rel="shortcut icon" href="img/favicon.png">
 
     <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
     </script>
 
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- CSS  and JS -->
     <link rel="stylesheet" href="css/style.css">
@@ -37,7 +39,14 @@
                     <!-- Authentication Links -->
                     <li class="nav-item mx-3"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item mx-3"><a class="nav-link" href="index.html">About</a></li>
-                    <li class="nav-item mx-3"><a class="nav-link active" href="#">Login</a></li>
+                    <?php 
+                    if (!isset($_SESSION['email'])) {
+                        echo "<li class='nav-item mx-3'><a class='nav-link active' href='login.php'>Login</a></li>";
+                    }
+                    else{
+                        echo "<li class='nav-item mx-3'><a class='nav-link active' href='#'>Logout</a></li>";
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -48,21 +57,19 @@
             <div class="col-sm-6 login-section-wrapper">
                 <div class="login-wrapper my-auto">
                     <h1 class="login-title mt-5">Login</h1>
-                    <form action="#!">
+                    <form action="/Logic/login.php" method="POST">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control"
-                                placeholder="email@example.com">
+                            <input type="text" name="email" id="email" class="form-control" placeholder="email@example.com">
                         </div>
                         <div class="form-group mb-4">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control"
-                                placeholder="enter your passsword">
+                            <input type="text" name="password" id="password" class="form-control" placeholder="enter your passsword">
                         </div>
-                        <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login">
+                        <input name="login" id="login" class="btn btn-block login-btn" type="submit" value="Login">
                     </form>
                     <a href="#!" class="forgot-password-link">Forgot password?</a>
-                    <p class="login-wrapper-footer-text">Don't have an account? 
+                    <p class="login-wrapper-footer-text">Don't have an account?
                         <a href="register.html" class="text-reset">Register here</a>
                     </p>
                 </div>

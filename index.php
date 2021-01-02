@@ -1,5 +1,10 @@
 <html lang="en">
-
+    <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+    session_start();
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,7 +48,14 @@
                     <!-- Authentication Links -->
                     <li class="nav-item mx-3"><a class="nav-link" href="#top">Home</a></li>
                     <li class="nav-item mx-3"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item mx-3"><a class="nav-link" href="login.html">Login</a></li>
+                    <?php 
+                    if (!isset($_SESSION['email'])) {
+                        echo "<li class='nav-item mx-3'><a class='nav-link active' href='login.php'>Login</a></li>";
+                    }
+                    else{
+                        echo "<li class='nav-item mx-3'><a class='nav-link active' href='/Logic/logout.php'>Logout</a></li>";
+                    }
+                    ?>                
                 </ul>
             </div>
         </div>
