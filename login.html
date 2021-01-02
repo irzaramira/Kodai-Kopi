@@ -1,0 +1,77 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kodai Kopi</title>
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS  and JS -->
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+        <div class="container my-2">
+            <img class="logo-kodai mr-3" src="img/logo3.jpeg">
+
+            <div class="collapse navbar-collapse navbar-align-right" id="navbarSupportedContent">
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    <li class="nav-item mx-3"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item mx-3"><a class="nav-link" href="index.html">About</a></li>
+                    <li class="nav-item mx-3"><a class="nav-link active" href="#">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 login-section-wrapper">
+                <div class="login-wrapper my-auto">
+                    <h1 class="login-title mt-5">Login</h1>
+                    <form action="#!">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" class="form-control"
+                                placeholder="email@example.com">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="enter your passsword">
+                        </div>
+                        <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login">
+                    </form>
+                    <a href="#!" class="forgot-password-link">Forgot password?</a>
+                    <p class="login-wrapper-footer-text">Don't have an account? 
+                        <a href="register.html" class="text-reset">Register here</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 px-0 d-none d-sm-block">
+                <img src="img/ambience.JPG" alt="login image" class="login-img">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
