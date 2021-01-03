@@ -3,11 +3,11 @@
 <form action="/Logic/insertPromo.php" enctype="multipart/form-data" method="POST">
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="form-control" placeholder="your name">
+        <input type="text" name="name" id="name" class="form-control" placeholder="PromoKhusus" onblur="this.value=removeSpaces(this.value);">
     </div>
     <div class="form-group">
         <label for="discount">Discount</label>
-        <input type="text" name="discount" id="discount" class="form-control" placeholder="5000">
+        <input type="number" name="discount" id="discount" class="form-control" placeholder="5000" onblur="this.value=removeSpaces(this.value);">
     </div>
     <div class="form-group">
         <label for="description">Description</label>
@@ -29,11 +29,14 @@
     document.getElementById("name").addEventListener("change", createLink);
     document.getElementById("discount").addEventListener("change", createLink);
 
-
     function createLink() {
         var name = document.getElementById("name").value;
         var discount = document.getElementById("discount").value;
 
         document.getElementById("link").innerHTML = "http://localhost/Logic/processPromo.php?name=" + name + "&discount=" + discount;
+    }
+
+    function removeSpaces(string) {
+        return string.split(' ').join('');
     }
 </script>
