@@ -1,11 +1,16 @@
 <?php
 class DB{	
+	// 
+	// private $servername = "localhost";
+	// private $username = "id15791167_kodaikopi54";
+	// private $password = "!Zarajelek54";
+	// private $dbase = "id15791167_kodaikopi";
+
 	private $servername = "localhost";
-	# private $username = "id15791167_kodaikopi54";
 	private $username = "root";
 	private $password = "";
-	// private $dbase = "id15791167_kodaikopi";
 	private $dbase = "kodaikopi";
+	
 	private $_mysqliConnectionObject; 
 	private static $_instance; //The single instance
 	
