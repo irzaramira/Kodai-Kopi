@@ -39,8 +39,6 @@ class UserService {
                 
                 $data[]=$result->fetch_array();
                 $a =  $data[0];
-				$this->DB->closeCon();
-				$stmt->close();
 				//verifying input and decrypting password from DB
 				return password_verify($password, $a["password"]);
 				
@@ -54,14 +52,13 @@ class UserService {
 	public function insertUser($name, $email, $password, $number){
 		try 
 		{
+			$isAdmin = 0;
 			//Encrypting Password
 			$hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 			$conn=$this->DB->connect();
-            $stmt = $conn->prepare("INSERT into user (username, email, password, number) VALUES (?, ?, ?, ?) ;");
-			
-			$regisDate = date("y-m-d h:i:sa");
-			
-			$stmt->bind_param('sssi', $name, $email, $hashedpassword, $number);
+            $stmt = $conn->prepare("INSERT into user (username, email, password, number, isAdmin) VALUES (?, ?, ?, ?, ?) ;");
+						
+			$stmt->bind_param('sssii', $name, $email, $hashedpassword, $number, $isAdmin);
 			return $stmt->execute();
 			
 			$conn->DB->closeCon();
@@ -76,7 +73,7 @@ class UserService {
 		try 
 		{
 			$conn = $this->DB->connect();
-			$stmt = $conn->prepare("SELECT Email FROM users WHERE Email = ? ;");
+			$stmt = $conn->prepare("SELECT Email FROM user WHERE Email = ? ;");
 			$stmt->bind_param('s', $email);
 			$stmt->execute();
 			
@@ -99,52 +96,6 @@ class UserService {
         }
 	}
 	
-	public function sendEmailForgotPassword($email){
-		try 
-		{
-			$conn = $this->DB->connect();
-			$stmt = $conn->prepare("SELECT email FROM users WHERE email = ? ;");
-			$stmt->bind_param('s', $email);
-			$stmt->execute();
-			
-			$result = $stmt->get_result();
-			
-			
-			$numRows = $result->num_rows; 
-        	if ($numRows > 0) 
-        	{
-				return $this->sendResetEmail($email);
-				
-			} 
-			else{
-				return false;
-			}
-
-			$conn->DB->closeCon();
-			$stmt->close();
-        
-		}
-		catch (Exception $e) {
-                echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-	}
-	
-	
-	public function sendResetEmail($email){
-		$link = "http://622796.infhaarlem.nl/resetpasswordpage.php";
-
-		$subject = 'Reset Password';
-		$message = 'Click On This Link to Reset Password '.$link.' ';
-		$headers = 'From:  s622796@server.infhaarlem.nl';
-		//check if the email address is invalid $secure_check
-		$secure_check = $this->SanitizeEmail($email);
-		if ($secure_check == false) {
-    		echo "Invalid input";
-		} else { //send email 
-    		mail($email, $subject, $message, $headers);
-			return true;
-		}
-	}
 	//Securing Email
 	function SanitizeEmail($field) {
 		$field = filter_var($field, FILTER_SANITIZE_EMAIL);
@@ -174,20 +125,28 @@ class UserService {
         }
 
 	}
-	
-	public function editProfile($newname, $newemail, $newaddress, $oldemail){
+
+	public function checkAdmin($email){
 		try{
 			$conn = $this->DB->connect();
-		
-			$stmt = $conn->prepare("UPDATE users SET Name = ? , Email = ? , address = ? WHERE email = ? ;");
-			$stmt->bind_param('ssss', $newname, $newemail, $newaddress, $oldemail);
-			return $stmt->execute();
 			
-			$conn->DB->closeCon();
-			$stmt->close();
+			$stmt = $conn->prepare("SELECT isAdmin FROM user WHERE email = ? ;");
+			$stmt->bind_param('s', $email);
+			$stmt->execute();
+           
+			$result = $stmt->get_result();
+			$numRows = $result->num_rows;       
+			if ($numRows > 0) 
+			{
+				while ($row = $result->fetch_assoc()) 
+				{ 
+					$admin = $row['isAdmin']; 
+				} 
+				return $admin;
+			} 
 		}
 		catch (Exception $e) {
-                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
 	}
 }

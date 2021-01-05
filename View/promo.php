@@ -1,5 +1,6 @@
 <?php
-require_once '../Controller/PromoController.php'
+require_once '../Controller/PromoController.php';
+session_start();
 ?>
 <html lang="en">
 <?php
@@ -34,7 +35,7 @@ include 'header.php';
                                 <div class='col-lg-6'>
                                     Discount: " . $promo->discount . " Rupiah
                                     <br>
-                                    <img src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http://localhost/Logic/processPromo.php?name=". $promo->name . "&discount=" . $promo->discount . "&choe=UTF-8'
+                                    <img src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=https://kodaikopimoi.000webhostapp.com/Logic/processPromo.php?name=". $promo->name . "discount=" . $promo->discount . "&choe=UTF-8'
                                 </div>
                             </div>
                         </div>

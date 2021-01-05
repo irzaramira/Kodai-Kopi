@@ -29,7 +29,10 @@ class UserController{
 	
 	public function resetPassword($email, $password){
 		return $this->UserService->resetPassword($email, $password);
+	}
 
+	public function checkAdmin($email){
+		return $this->UserService->checkAdmin($email);
 	}
 }
 ?>

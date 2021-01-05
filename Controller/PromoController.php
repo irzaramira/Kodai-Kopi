@@ -9,9 +9,9 @@ class PromoController{
 		$this->PromoService = new PromoService();
 	}
 	
-	public function insertPromo($name, $discount, $desc, $pic){
+	public function insertPromo($name, $discount, $desc){
 		
-		return $this->PromoService->insertPromo($name, $discount, $desc, $pic);
+		return $this->PromoService->insertPromo($name, $discount, $desc);
     }
     
     public function getAllPromo(){
@@ -22,12 +22,21 @@ class PromoController{
             $Promo->name = $data['name'];
             $Promo->discount = $data['discount'];
             $Promo->description = $data['description'];
-            $Promo->pic = $data['pic'];
             array_push($promos, $Promo);
         }
         return $promos;
     
     }
+    public function checkPromoExists($name, $discount){
+        return $this->PromoService->checkPromoExists($name, $discount);
+    }
 
+    public function checkPromoUsed($email, $name, $discount){
+        return $this->PromoService->checkPromoUsed($email,$name, $discount);
+    }
+
+    public function insertPromoUsed($email, $name, $discount){
+        return $this->PromoService->insertPromoUsed($email,$name,$discount);
+	}
 }
 ?>

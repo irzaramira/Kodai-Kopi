@@ -1,65 +1,17 @@
+<?php
+session_start();
+?>
+
 <html lang="en">
-    <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-    session_start();
-    ?>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kodai Kopi</title>
-    <link rel="shortcut icon" href="img/favicon.png">
 
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-    </script>
-
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-
-    <!-- CSS  and JS -->
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js"></script>
-
-
-
-</head>
+<?php
+    include 'View/header.php';
+?>
 
 <body data-spy="scroll">
 
     <div id="top"></div>
-
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
-        <div class="container my-2">
-            <img class="logo-kodai mr-3" src="img/logo3.jpeg">
-
-            <div class="collapse navbar-collapse navbar-align-right" id="navbarSupportedContent">
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    <li class="nav-item mx-3"><a class="nav-link" href="#top">Home</a></li>
-                    <li class="nav-item mx-3"><a class="nav-link" href="#about">About</a></li>
-                    <?php 
-                    if (!isset($_SESSION['email'])) {
-                        echo "<li class='nav-item mx-3'><a class='nav-link active' href='login.php'>Login</a></li>";
-                    }
-                    else{
-                        echo "<li class='nav-item mx-3'><a class='nav-link active' href='/Logic/logout.php'>Logout</a></li>";
-                    }
-                    ?>                
-                </ul>
-            </div>
-        </div>
-    </nav>
+   
 
     <div id="carousel" class="carousel slide mt-5 shadow-sm" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -105,39 +57,9 @@
         </div>
     </div>
 
-
-    <footer class="text-lg-start" style="background-color: black; color: white;">
-        <!-- Grid container -->
-        <div class="container p-4">
-            <!--Grid row-->
-            <div class="row">
-                <!--Grid column-->
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <h2 class="font-weight-bold">KODAI KOPI</h2>
-                    <p>
-                        Mall Of Indonesia<br>Ruko French Walk, Blok F05B
-                    </p>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <h5 class="text-uppercase mb-0">Contacts</h5>
-
-                    <ul class="list-unstyled">
-                        <li class="my-2">
-                            <a href="https://instagram.com/kodaikopi.id" target="blank" class="text-light">Instagram</a>
-                        </li>
-                        <li class="my-2">
-                            <a href="https://wa.me/6281999225161" target="blank" class="text-light">WhatsApp</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
-            </div>
-            <!--Grid row-->
-        </div>
-    </footer>
+    <?php
+    include 'View/footer.php';
+    ?>
 
 </body>
 

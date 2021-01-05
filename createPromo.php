@@ -1,3 +1,15 @@
+<?php
+session_start();
+if(!isset($_SESSION['isAdmin'])){
+    header('Location: login.php');
+}
+else if($_SESSION['isAdmin'] == 0){
+    header("Location: index.php");
+}
+else{
+
+}
+?>
 <html>
 
 <form action="/Logic/insertPromo.php" enctype="multipart/form-data" method="POST">
@@ -14,28 +26,12 @@
         <input type="text" id="description" name="description" class="form-control" placeholder="your description">
     </div>
 
-    <h3>Copy paste link di bawah dan upload ke https://www.qr-code-generator.com/ untuk mendapatkan barcode dan upload foto nya</h3>
-    <h1 id="link"> Test </h1>
-    <div class="form-group">
-        Select image : <label for="file"> File</label>
-        <input type="file" name="file" id="file"><br />
-    </div>
     <input name="insertPromo" id="insertPromo" class="btn btn-block login-btn" type="submit" value="Insert Promo">
 </form>
 
 </html>
 
 <script>
-    document.getElementById("name").addEventListener("change", createLink);
-    document.getElementById("discount").addEventListener("change", createLink);
-
-    function createLink() {
-        var name = document.getElementById("name").value;
-        var discount = document.getElementById("discount").value;
-
-        document.getElementById("link").innerHTML = "http://localhost/Logic/processPromo.php?name=" + name + "&discount=" + discount;
-    }
-
     function removeSpaces(string) {
         return string.split(' ').join('');
     }

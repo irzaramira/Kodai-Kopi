@@ -16,30 +16,33 @@ $user = new UserController();
 
 
 if (empty($password) || empty($email) || empty($number) ) {
-	header("Location: signuppage.php?error=emptyboxes");
+	header("Location: ../register.php?error=emptyboxes");
 
 	exit();
 }
 else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-	header("Location: signuppage.php?error=invalidmail");
+	header("Location: ../register.php?error=invalidmail");
     exit();
 }
 else if ($password !== $repeatpassword) {
-    header("Location: signuppage.php?error=passworddoesnotmatch");
+    header("Location: ../register.php?error=passworddoesnotmatch");
 	exit();
+}
+else{
+	if($user->checkEmailExist($email) == true){
+		header("Location: ../register.php?error=emailtaken");
+		exit();
+	}
+	else{
+		if($user->insertUser($name, $email, $password, $number) == true){
+			header("location: ../login.php?signup=success");
+		}
+		else{
+			header("location: ../register.html?SignUp=Unsuccessful");
+		}
+	}	
 }
 
        
-if($user->checkEmailExist($email) == true){
-	header("Location: signup.php?error=emailtaken");
-    exit();
-}
-else{
-	if($user->insertUser($name, $email, $password, $number) == true){
-		header("location: ../login.php?signup=success");
-	}
-	else{
-		header("location: ../register.html?SignUp=Unsuccessful");
-	}
-}	
+
 ?>

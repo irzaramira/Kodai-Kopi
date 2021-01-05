@@ -4,5 +4,6 @@ class User{
 	 var $email;
 	 var $address;
 	 var $birthDate;
+	 var $isAdmin;
 } 
 ?>

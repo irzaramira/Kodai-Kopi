@@ -12,7 +12,7 @@ $email =  $_POST["email"];
 $user = new UserController();
 if(	$user->verifyLogin($email, $password) == true){
 	$_SESSION['email'] = $email;
-	
+	$_SESSION['isAdmin'] = $user->checkAdmin($email);
 	header("location: ../index.php?Login=Successful");
 }
 else{
