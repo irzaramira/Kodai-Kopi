@@ -34,5 +34,9 @@ class UserController{
 	public function checkAdmin($email){
 		return $this->UserService->checkAdmin($email);
 	}
+
+	public function logActivity($email, $log){
+		return $this->UserService->logActivity($email, $log);
+	}
 }
 ?>

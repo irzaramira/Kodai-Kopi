@@ -19,6 +19,7 @@ class PromoController{
         $promos = array();
         foreach($datas as $data){
             $Promo = new Promo();
+            $Promo->id = $data['id'];
             $Promo->name = $data['name'];
             $Promo->discount = $data['discount'];
             $Promo->description = $data['description'];
@@ -37,6 +38,10 @@ class PromoController{
 
     public function insertPromoUsed($email, $name, $discount){
         return $this->PromoService->insertPromoUsed($email,$name,$discount);
-	}
+    }
+    
+    public function deletePromo($id){
+        return $this->PromoService->deletePromo($id);
+    }
 }
 ?>

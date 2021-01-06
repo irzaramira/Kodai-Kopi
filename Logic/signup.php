@@ -35,6 +35,7 @@ else{
 	}
 	else{
 		if($user->insertUser($name, $email, $password, $number) == true){
+			$user->logActivity($email, "New User Registered")
 			header("location: ../login.php?signup=success");
 		}
 		else{

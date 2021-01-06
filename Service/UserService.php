@@ -1,5 +1,5 @@
 <?php
-include "../DB.php";
+include_once "../DB.php";
 
 class UserService {
 	private $DB = NULL; 
@@ -144,6 +144,22 @@ class UserService {
 				} 
 				return $admin;
 			} 
+		}
+		catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+	}
+	public function logActivity($email, $log){
+		try 
+		{
+			$conn=$this->DB->connect();
+            $stmt = $conn->prepare("INSERT into logger (email, log) VALUES (?, ?) ;");
+						
+			$stmt->bind_param('ss', $email, $log);
+			return $stmt->execute();
+		
+			$conn->DB->closeCon();
+			$stmt->close();	        
 		}
 		catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";

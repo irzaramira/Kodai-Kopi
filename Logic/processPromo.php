@@ -7,10 +7,14 @@ $name = $data[0];
 $discount = $data[1];
 $email = $_SESSION['email'];
 include '../Controller/PromoController.php';
+include '../Controller/UserController.php';
+
 if (!isset($_SESSION['email'])){
      header('location: ../login.php');
 }
 $promoController = new PromoController();
+$userController = new UserController();
+
 if($promoController->checkPromoExists($name,$discount) == false){
     header('Location: ../View/promo.php?promodoesnotexists');
 }
@@ -21,6 +25,7 @@ else{
     if($promoController->insertPromoUsed($email, $name, $discount)){
         $_SESSION['discount'] = $discount;
         $_SESSION['promoName'] = $name;
+        $userController->logActivity($_SESSION['email'], 'Use Promo ' . $name);
         header('Location: ../View/promoSuccess.php');
     }
 }

@@ -18,11 +18,18 @@ include 'header.php';
     $index = 1;
     echo "<div class='container mb-5'>";
     foreach ($promoList as $promo) {
+        $link = '../Logic/deletePromo.php?';
+        $button = "";
+        if(isset($_SESSION['isAdmin'])){
+            if($_SESSION['isAdmin'] == 1){
+                $button = "<a class='btn btn-danger float-right' href='" . $link ."promo=". json_encode($promo) ."' role='button'>Delete</a>";
+            }
+        }
         echo "<div class='accordion' id='accordionExample'>
             <div class='card'>
                 <div class='card-header text-center' type='button' id='headingOne' data-toggle='collapse'
                     data-target='#collapse" . $index . "' aria-expanded='false' aria-controls='collapseOne'>
-                    " . strtoupper($promo->name) . "
+                    " . strtoupper($promo->name) . $button ."
                 </div>
 
                 <div id='collapse" . $index . "' class='collapse' aria-labelledby='headingOne'

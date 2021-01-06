@@ -1,5 +1,5 @@
 <?php
-include "../DB.php";
+include_once "../DB.php";
 
 class PromoService {
 	private $DB = NULL; 
@@ -79,6 +79,20 @@ class PromoService {
 		SELECT USER.id, PROMO.id FROM user AS USER, promo AS PROMO WHERE email LIKE '$email' AND PROMO.name LIKE '$name' AND PROMO.discount = $discount";
 		
 		return $this->DB->connect()->query($sql); 
+	}
+
+	public function deletePromo($id){
+		try 
+		{
+			$conn=$this->DB->connect();
+            $stmt = $conn->prepare("DELETE FROM promo WHERE id = ? ;");
+						
+			$stmt->bind_param('i', $id);
+			return $stmt->execute();       
+		}
+		catch (Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
 	}
 }  
 ?>
